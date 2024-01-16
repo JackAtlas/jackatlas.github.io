@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.25.0" theme-name="Stellar" theme-version="1.25.0">
+  
+  <meta name="generator" content="Hexo 7.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>《JavaScript 设计模式与开发实战》读书笔记 8 - JackAtlas</title>
+
+  
+    <meta name="description" content="第八章 发布-订阅模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《JavaScript 设计模式与开发实战》读书笔记 8">
+<meta property="og:url" content="http://example.com/2017/02/20/js-design-patterns-8/index.html">
+<meta property="og:site_name" content="JackAtlas">
+<meta property="og:description" content="第八章 发布-订阅模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-02-20T14:56:01.000Z">
+<meta property="article:modified_time" content="2023-12-22T02:19:50.000Z">
+<meta property="article:author" content="JackAtlas">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">JackAtlas</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search-wrapper"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1705074644177" class="icon search-icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc" collapse="false"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">第八章 发布-订阅模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">8.2 发布-订阅模式的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-DOM-%E4%BA%8B%E4%BB%B6"><span class="toc-text">8.3 DOM 事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="toc-text">8.4 自定义事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E9%80%9A%E7%94%A8%E5%AE%9E%E7%8E%B0"><span class="toc-text">8.5 发布-订阅模式的通用实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-6-%E5%8F%96%E6%B6%88%E8%AE%A2%E9%98%85%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="toc-text">8.6 取消订阅的事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-7-%E7%BD%91%E7%AB%99%E7%99%BB%E9%99%86"><span class="toc-text">8.7 网站登陆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-8-%E5%85%A8%E5%B1%80%E7%9A%84%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E5%AF%B9%E8%B1%A1"><span class="toc-text">8.8 全局的发布-订阅对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-9-%E6%A8%A1%E5%9D%97%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">8.9 模块间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-10-%E5%BF%85%E9%A1%BB%E5%85%88%E8%AE%A2%E9%98%85%E5%86%8D%E5%8F%91%E5%B8%83%E5%90%97"><span class="toc-text">8.10 必须先订阅再发布吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-11-%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81"><span class="toc-text">8.11 全局事件的命名冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-12-JavaScript-%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BE%BF%E5%88%A9%E6%80%A7"><span class="toc-text">8.12 JavaScript 实现发布-订阅模式的便利性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-13-%E5%B0%8F%E7%BB%93"><span class="toc-text">8.13 小结</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/jackatlas" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta"><span class="author">发布于</span>
+    <span class="created"><time datetime="2017-02-20T14:56:01.000Z">2017-02-20</time></span>
+    
+    <span class="updated">，更新于&nbsp;<time datetime="2023-12-22T02:19:50.000Z">2023-12-22</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>《JavaScript 设计模式与开发实战》读书笔记 8</span></h1>
+<h2 id="第八章-发布-订阅模式"><a href="#第八章-发布-订阅模式" class="headerlink" title="第八章 发布-订阅模式"></a>第八章 发布-订阅模式</h2><span id="more"></span>
+
+<blockquote>
+<p>发布-订阅模式又叫观察者模式，它定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。</p>
+</blockquote>
+<p>在 JavaScript 开发中，我们一般用事件模型来替代传统的发布-订阅模式。</p>
+<h3 id="8-2-发布-订阅模式的作用"><a href="#8-2-发布-订阅模式的作用" class="headerlink" title="8.2 发布-订阅模式的作用"></a>8.2 发布-订阅模式的作用</h3><p>发布-订阅模式可以广泛应用于异步编程中，是替代传统回调函数的方案。在异步编程中使用发布-订阅模式，无需过多关注对象在异步运行期间的内部状态，只需订阅感兴趣的事件发生点。</p>
+<p>发布-订阅模式可以取代对象之间硬编码的通知机制，一个对象不用再显式地调用另外一个对象的某个接口。发布-订阅模式让两个对象松耦合地联系在一起。当有新的订阅者出现时，发布者的代码不需要任何修改；同样发布者需要改变时，也不会影响到之前的订阅者。只要之前约定的事件名没有变化，就可以自由使用它们。</p>
+<h3 id="8-3-DOM-事件"><a href="#8-3-DOM-事件" class="headerlink" title="8.3 DOM 事件"></a>8.3 DOM 事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="number">2</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>订阅 <code>document.body</code> 上的 <code>click</code> 事件，当 <code>body</code> 节点被点击时，<code>body</code> 节点便会向订阅者发布这个消息。</p>
+<h3 id="8-4-自定义事件"><a href="#8-4-自定义事件" class="headerlink" title="8.4 自定义事件"></a>8.4 自定义事件</h3><ol>
+<li>指定谁充当发布者；</li>
+<li>给发布者添加一个缓存列表，用于存放回调函数以便通知订阅者；</li>
+<li>发布消息的时候，发布者会遍历这个缓存列表，依次触发里面存放的订阅者回调函数。</li>
+</ol>
+<p>还可以往回调函数里填入一些参数，订阅者可以接收这些参数。</p>
+<p>同时也有必要增加一个标示 <code>key</code>，让订阅者只订阅自己感兴趣的消息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salesOffices = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">salesOffices.<span class="property">clientList</span> = [];</span><br><span class="line"></span><br><span class="line">salesOffices.<span class="property">listen</span> = <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">clientList</span>[key]) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">clientList</span>[key] = [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">clientList</span>[key].<span class="title function_">push</span>(fn);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">salesOffices.<span class="property">trigger</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> key = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">shift</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>),  <span class="comment">// 取出消息类型</span></span><br><span class="line">      fns = <span class="variable language_">this</span>.<span class="property">clientList</span>[key];                   <span class="comment">// 取出该消息类型的回调函数集合</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!fns || fns.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[i++];) &#123;</span><br><span class="line">    fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);                    <span class="comment">// arguments 是发布消息时附带的参数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 小明订阅 88 平方米房子的消息</span></span><br><span class="line">salesOffices.<span class="title function_">listen</span>(<span class="string">&#x27;squareMeter88&#x27;</span>, <span class="keyword">function</span> (<span class="params">price</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;价格= &#x27;</span> + price);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">salesOffice.<span class="title function_">trigger</span>(<span class="string">&#x27;squareMeter88&#x27;</span>, <span class="number">2000000</span>);        <span class="comment">// 发布 88 平方米房子的价格</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-5-发布-订阅模式的通用实现"><a href="#8-5-发布-订阅模式的通用实现" class="headerlink" title="8.5 发布-订阅模式的通用实现"></a>8.5 发布-订阅模式的通用实现</h3><p>现在把发布-订阅的功能提取出来，放在一个单独的对象内：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> event = &#123;</span><br><span class="line">  <span class="attr">clientList</span>: [],</span><br><span class="line">  <span class="attr">listen</span>: <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">clientList</span>[key]) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">clientList</span>[key] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">clientList</span>[key].<span class="title function_">push</span>(fn);     <span class="comment">// 订阅的消息添加进缓存列表</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">trigger</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">shift</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>),</span><br><span class="line">        fns = <span class="variable language_">this</span>.<span class="property">clientList</span>[key];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!fns || fns.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[i++];) &#123;</span><br><span class="line">      fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>再定义一个 <code>installEvent</code> 函数，这个函数可以给所有的对象都动态安装发布-订阅功能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> installEvent = <span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> event) &#123;</span><br><span class="line">    obj[i] = event[i];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>给某个对象增加发布-订阅功能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="title function_">installEvent</span>(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-6-取消订阅的事件"><a href="#8-6-取消订阅的事件" class="headerlink" title="8.6 取消订阅的事件"></a>8.6 取消订阅的事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">event.<span class="property">remove</span> = <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> fns = <span class="variable language_">this</span>.<span class="property">clientList</span>[key];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!fns) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!fn) &#123;     <span class="comment">// 如果没有传入具体的回调函数，表示需要取消 key 对应消息的所有订阅</span></span><br><span class="line">    fns &amp;&amp; (fns.<span class="property">length</span> = <span class="number">0</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> l = fns.<span class="property">length</span> - <span class="number">1</span>; l &gt;= <span class="number">0</span>; l--) &#123;</span><br><span class="line">      <span class="keyword">var</span> _fn = fns[l];</span><br><span class="line">      <span class="keyword">if</span> (_fn === fn) &#123;</span><br><span class="line">        fns.<span class="title function_">splice</span>(l, <span class="number">1</span>);   <span class="comment">// 删除订阅者的回调函数</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-7-网站登陆"><a href="#8-7-网站登陆" class="headerlink" title="8.7 网站登陆"></a>8.7 网站登陆</h3><p>假设页面各个模块的渲染都有一个共同的前提条件，就是必须先用 ajax 异步请求获取用户的登录信息。</p>
+<p>异步的问题通常可以用回调函数来解决。</p>
+<p>但此处用发布-订阅模式的原因是，我们不知道除了现有的模块，将来还有哪些模块需要使用这些用户信息。如果它们和信息模块产生了强耦合，比如这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">login.<span class="title function_">succ</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  header.<span class="title function_">setAvatar</span>(data.<span class="property">avatar</span>);     <span class="comment">// 设置 header 模块的头像</span></span><br><span class="line">  nav.<span class="title function_">setAvatar</span>(data.<span class="property">avatar</span>);        <span class="comment">// 设置导航模块的头像</span></span><br><span class="line">  message.<span class="title function_">refresh</span>();                 <span class="comment">// 刷新消息列表</span></span><br><span class="line">  cart.<span class="title function_">refresh</span>();                    <span class="comment">// 刷新购物车列表</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>编写者必须了解 header 模块里设置头像的方法叫 <code>setAvatar</code>、购物车模块里刷新的方法叫 <code>refresh</code>，这种耦合性会使程序变得僵硬，header 模块不能随意再改变 <code>setAvatar</code> 的方法名，它自身也不能改名。这是针对具体实现编程的典型例子，针对具体实现编程是不被赞同的。</p>
+<p>用发布-订阅模式重写之后，对用户信息感兴趣的业务模块将自行订阅登录成功的消息事件。当登录成功时，登录模块只需要发布登录成功的消息，而不需要关心业务方要做什么，也不需要了解它们的内部细节。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(<span class="string">&#x27;http://xxx.com?login&#x27;</span>, <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="comment">// 登录成功</span></span><br><span class="line">  login.<span class="title function_">trigger</span>(<span class="string">&#x27;loginSucc&#x27;</span>, data); <span class="comment">// 发布登录成功的消息</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>各模块监听登录成功的消息：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> header = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  login.<span class="title function_">listen</span>(<span class="string">&#x27;loginSucc&#x27;</span>, <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    header.<span class="title function_">setAvatar</span>(data.<span class="property">avatar</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">setAvatar</span>: <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;设置 header 模块的头像&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>我们随时可以把 <code>setAvatar</code> 的方法改名。如果在登录完成后增加一个刷新收货地址列表的行为，只要在收货地址模块里加上监听消息的方法即可。</p>
+<h3 id="8-8-全局的发布-订阅对象"><a href="#8-8-全局的发布-订阅对象" class="headerlink" title="8.8 全局的发布-订阅对象"></a>8.8 全局的发布-订阅对象</h3><p>两个小问题：</p>
+<ul>
+<li>给每一个发布者都添加了 <code>listen</code> 和 <code>trigger</code> 方法，以及一个缓存列表 <code>clientList</code>，资源浪费。</li>
+<li>订阅者与发布者仍有一定的耦合性，订阅者至少要知道发布者的名字，才能订阅到事件。</li>
+</ul>
+<p>发布-订阅模式可以用一个全局的 <code>Event</code> 对象来实现，订阅者不需要了解消息来自哪个发布者，发布者也不需要知道消息推送给哪些订阅者。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Event</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> clientList = &#123;&#125;,</span><br><span class="line">      listen,</span><br><span class="line">      trigger,</span><br><span class="line">      remove;</span><br><span class="line"></span><br><span class="line">  listen = <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!clientList[key]) &#123;</span><br><span class="line">      clientList[key] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    clientList[key].<span class="title function_">push</span>(fn);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  trigger = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">shift</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>),</span><br><span class="line">        fns = clientList[key];</span><br><span class="line">        <span class="keyword">if</span> (!fns || fns.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[i++];) &#123;</span><br><span class="line">          fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  remove = <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fns = clientList[key];</span><br><span class="line">    <span class="keyword">if</span> (!fns) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      fns &amp;&amp; (fns.<span class="property">length</span> = <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> l = fns.<span class="property">length</span> - <span class="number">1</span>; l &gt;= <span class="number">0</span>; l--) &#123;</span><br><span class="line">        <span class="keyword">var</span> _fn = fns[l];</span><br><span class="line">        <span class="keyword">if</span> (_fn === fn) &#123;</span><br><span class="line">          fns.<span class="title function_">splice</span>(l, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">listen</span>: listen,</span><br><span class="line">    <span class="attr">trigger</span>: trigger,</span><br><span class="line">    <span class="attr">remove</span>: remove</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-9-模块间通信"><a href="#8-9-模块间通信" class="headerlink" title="8.9 模块间通信"></a>8.9 模块间通信</h3><p>上一节的发布-订阅模式的实现，是基于一个全局的 <code>Event</code> 对象，利用它可以在两个封装良好的模块中进行通信，这两个模块可以完全不知道对方的存在。</p>
+<p>但是，模块之间如果用了太多的全局发布-订阅模式来通信，那么模块与模块之间的联系就会被隐藏到了背后。我们最终会搞不清楚消息来自哪个模块，或者消息会流向哪些模块。</p>
+<h3 id="8-10-必须先订阅再发布吗"><a href="#8-10-必须先订阅再发布吗" class="headerlink" title="8.10 必须先订阅再发布吗"></a>8.10 必须先订阅再发布吗</h3><p>之前实现的订阅-发布模式，都是订阅者必须先订阅一个消息，随后才能接收到发布者发布的消息。</p>
+<p>某些情况下，需要先将消息保存下来，等到有对象来订阅它的时候，再重新把消息发布给订阅者。</p>
+<p>建立一个存放离线事件的堆栈，当事件发布的时候，如果此时还没有订阅者来订阅这个事件，我们暂时把发布事件的动作包裹在一个函数里，这些包裹函数将被存入堆栈，等到有对象来订阅此事件的时候，我们将遍历堆栈并依次执行这些包裹函数。</p>
+<h3 id="8-11-全局事件的命名冲突"><a href="#8-11-全局事件的命名冲突" class="headerlink" title="8.11 全局事件的命名冲突"></a>8.11 全局事件的命名冲突</h3><p>全局的发布-订阅对象里只有一个 <code>clientList</code> 来存放消息名和回调函数，会出现命名冲突的情况，因此可以给 <code>Event</code> 对象提供创建命名空间的功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Event</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="variable language_">global</span> = <span class="variable language_">this</span>,</span><br><span class="line">      <span class="title class_">Event</span>,</span><br><span class="line">      _default = <span class="string">&#x27;default&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Event</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> _listen,</span><br><span class="line">        _trigger,</span><br><span class="line">        _remove,</span><br><span class="line">        _slice = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>,</span><br><span class="line">        _shift = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">shift</span>,</span><br><span class="line">        _unshift = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">unshift</span>,</span><br><span class="line">        namespaceCache = &#123;&#125;,</span><br><span class="line">        _create,</span><br><span class="line">        find,</span><br><span class="line">        each = <span class="keyword">function</span> (<span class="params">ary, fn</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> ret;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = ary.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> n = ary[i];</span><br><span class="line">            ret = fn.<span class="title function_">call</span>(n, i, n);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        _listen = <span class="keyword">function</span> (<span class="params">key, fn, cache</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (!cache[key]) &#123;</span><br><span class="line">            cache[key] = [];</span><br><span class="line">          &#125;</span><br><span class="line">          cache[key].<span class="title function_">push</span>(fn);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        _remove = <span class="keyword">function</span> (<span class="params">key, cache, fn</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (cache[key]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (fn) &#123;</span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">var</span> i = cache[key].<span class="property">length</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cache[key] === fn) &#123;</span><br><span class="line">                  cache[key].<span class="title function_">splice</span>(i, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              cache[key] = [];</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        _trigger = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> cache = _shift.<span class="title function_">call</span>(<span class="variable language_">arguments</span>),</span><br><span class="line">              key = _shift.<span class="title function_">call</span>(<span class="variable language_">arguments</span>),</span><br><span class="line">              args = <span class="variable language_">arguments</span>,</span><br><span class="line">              _self = <span class="variable language_">this</span>,</span><br><span class="line">              ret,</span><br><span class="line">              stack = cache[key];</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (!stack || !stack.<span class="property">length</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> <span class="title function_">each</span>(stack, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">apply</span>(_self, args);</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        _create = <span class="keyword">function</span> (<span class="params">namespace</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> namespace = namespace || _default;</span><br><span class="line">          <span class="keyword">var</span> cache = &#123;&#125;,</span><br><span class="line">              offlineStack = [],   <span class="comment">// 离线事件</span></span><br><span class="line">              ret = &#123;</span><br><span class="line">                <span class="attr">listen</span>: <span class="keyword">function</span> (<span class="params">key, fn, last</span>) &#123;</span><br><span class="line">                  <span class="title function_">_listen</span>(key, fn, cache);</span><br><span class="line">                  <span class="keyword">if</span> (offlineStack === <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="keyword">if</span> (last === <span class="string">&#x27;last&#x27;</span>) &#123;</span><br><span class="line">                    offlineStack.<span class="property">length</span> &amp;&amp; offlineStack.<span class="title function_">pop</span>()();</span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">each</span>(offlineStack, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                      <span class="title function_">this</span>();</span><br><span class="line">                    &#125;);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  offlineStack = <span class="literal">null</span>;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">one</span>: <span class="keyword">function</span> (<span class="params">key, fn, last</span>) &#123;</span><br><span class="line">                  <span class="title function_">_remove</span>(key, cache);</span><br><span class="line">                  <span class="variable language_">this</span>.<span class="title function_">listen</span>(key, fn, last);</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">remove</span>: <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">                  <span class="title function_">_remove</span>(key, cache, fn);</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">trigger</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                  <span class="keyword">var</span> fn,</span><br><span class="line">                      args,</span><br><span class="line">                      _self = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">                  _unshift.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, cache);</span><br><span class="line">                  args = <span class="variable language_">arguments</span>;</span><br><span class="line">                  fn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> _trigger.<span class="title function_">apply</span>(_self, args);</span><br><span class="line">                  &#125;;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">if</span> (offlineStack) &#123;</span><br><span class="line">                    <span class="keyword">return</span> offlineStack.<span class="title function_">push</span>(fn);</span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="keyword">return</span> <span class="title function_">fn</span>();</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;;</span><br><span class="line"></span><br><span class="line">              <span class="keyword">return</span> namespace ? (namespaceCache[namespace] ? namespaceCache[namespace] : namespaceCache[namespace] = ret) : ret;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="attr">create</span>: _create,</span><br><span class="line">          <span class="attr">one</span>: <span class="keyword">function</span> (<span class="params">key, fn, last</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="variable language_">this</span>.<span class="title function_">create</span>();</span><br><span class="line">            event.<span class="title function_">one</span>(key, fn, last);</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">remove</span>: <span class="keyword">function</span> (<span class="params">key, fn</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="variable language_">this</span>.<span class="title function_">create</span>();</span><br><span class="line">            event.<span class="title function_">remove</span>(key, fn);</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">listen</span>: <span class="keyword">function</span> (<span class="params">key, fn, last</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="variable language_">this</span>.<span class="title function_">create</span>();</span><br><span class="line">            event.<span class="title function_">listen</span>(key, fn, last);</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">trigger</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="variable language_">this</span>.<span class="title function_">create</span>();</span><br><span class="line">            event.<span class="property">trigger</span>.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">  &#125;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Event</span>;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>客户调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先发布后订阅</span></span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">trigger</span>(<span class="string">&#x27;click&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">listen</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">a</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// 输出：1</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用命名空间</span></span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">create</span>(<span class="string">&#x27;namespace1&#x27;</span>).<span class="title function_">listen</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">a</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// 输出：1</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">create</span>(<span class="string">&#x27;namespace1&#x27;</span>).<span class="title function_">trigger</span>(<span class="string">&#x27;click&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">create</span>(<span class="string">&#x27;namespace2&#x27;</span>).<span class="title function_">listen</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">a</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// 输出：2</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Event</span>.<span class="title function_">create</span>(<span class="string">&#x27;namespace2&#x27;</span>).<span class="title function_">trigger</span>(<span class="string">&#x27;click&#x27;</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-12-JavaScript-实现发布-订阅模式的便利性"><a href="#8-12-JavaScript-实现发布-订阅模式的便利性" class="headerlink" title="8.12 JavaScript 实现发布-订阅模式的便利性"></a>8.12 JavaScript 实现发布-订阅模式的便利性</h3><p>在 Java 中实现一个自己的订阅-发布模式，通常会把订阅者对象自身当成引用传入发布者对象中，同时订阅者对象还需提供一个名为诸如 <code>update</code> 的方法，供发布者在适合的时候调用。在 JavaScript 中，用注册回调函数的形式来代替传统的发布-订阅模式，更加优雅和简单。</p>
+<p>在 JavaScript 中，我们无需去选择使用推模型还是拉模型。推模型是指在事件发生时，发布者一次性把所有变更的状态和数据都推送给订阅者。拉模型中，发布者仅仅通知订阅者事件已经发生，此外发布者要提供一些公开的接口供订阅者主动拉取数据。拉模型的好处是可以让订阅者“按需获取”，但同时会增加代码量和复杂度。</p>
+<p>在 JavaScript 中，<code>arguments</code> 可以很方便地表示参数列表，所以一般会选择推模型，使用 <code>Function.prototype.apply</code> 方法把所有参数推送给订阅者。</p>
+<h3 id="8-13-小结"><a href="#8-13-小结" class="headerlink" title="8.13 小结"></a>8.13 小结</h3><p>优点：一为时间上的解耦，二为对象之间的解耦。既可以用在异步编程中，也可以帮助完成更松耦合的代码编写，还可以用来实现一些别的设计模式，比如中介者模式。架构上看，MV* 少不了发布-订阅模式，JavaScript 本身也是一门基于事件驱动的语言。</p>
+<p>缺点：创建订阅者本身消耗一定的时间和内存，当订阅一个消息后，也许此消息最后都未发生，但这个订阅者会始终存在于内存中。另外，发布-订阅模式虽可以弱化对象之间的联系，但如果过度使用的话，对象和对象之间的必要联系也会被深埋在背后，导致程序难以跟踪维护和理解，特别是有多个发布者和订阅者嵌套到一起的时候。</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2017/02/24/js-design-patterns-9/">《JavaScript 设计模式与开发实战》读书笔记 9</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2017/02/17/js-design-patterns-7/">《JavaScript 设计模式与开发实战》读书笔记 7</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/jackatlas">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">@JackAtlas8864</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    
+<script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js","marked":"/js/plugins/marked.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@10.3/swiper-bundle.min.css","js":"https://unpkg.com/swiper@10.3/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img, .gallery img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied","toast":"复制成功"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

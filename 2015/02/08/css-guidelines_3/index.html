@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.25.0" theme-name="Stellar" theme-version="1.25.0">
+  
+  <meta name="generator" content="Hexo 7.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>（译）CSS Guidelines (3) - JackAtlas</title>
+
+  
+    <meta name="description" content="注释编写 CSS 之前的认知工作是非常巨大的。有很多事情要注意，不同项目中有很多细微的差别要记住，最糟糕的情况是大部分开发者发现他们“不是写这代码的人”。在一定程度上记忆你自己写的类名、规则、对象、辅助方法是可行的，但接受 CSS 的开发者则不然。 CSS 需要更多的注释。 CSS 是一种不会留下太多痕迹的声明式语言，但看 CSS 通常很难辨别：  一段 CSS 是否与其他地方的代码相关联； 一段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（译）CSS Guidelines (3)">
+<meta property="og:url" content="http://example.com/2015/02/08/css-guidelines_3/index.html">
+<meta property="og:site_name" content="JackAtlas">
+<meta property="og:description" content="注释编写 CSS 之前的认知工作是非常巨大的。有很多事情要注意，不同项目中有很多细微的差别要记住，最糟糕的情况是大部分开发者发现他们“不是写这代码的人”。在一定程度上记忆你自己写的类名、规则、对象、辅助方法是可行的，但接受 CSS 的开发者则不然。 CSS 需要更多的注释。 CSS 是一种不会留下太多痕迹的声明式语言，但看 CSS 通常很难辨别：  一段 CSS 是否与其他地方的代码相关联； 一段">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-02-08T06:22:54.000Z">
+<meta property="article:modified_time" content="2023-12-22T02:19:50.000Z">
+<meta property="article:author" content="JackAtlas">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="css">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">JackAtlas</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search-wrapper"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1705074644177" class="icon search-icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc" collapse="false"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7"><span class="toc-text">高级</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95%E6%8C%87%E9%92%88-%EF%BC%88Objective-Extension-Pointers%EF%BC%89"><span class="toc-text">对象扩展指针 （Objective-Extension Pointers）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8E%E7%BA%A7%EF%BC%88Low-level%EF%BC%89"><span class="toc-text">低级（Low-level）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E6%B3%A8%E9%87%8A"><span class="toc-text">预处理注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%B3%A8%E9%87%8A"><span class="toc-text">删除注释</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/jackatlas" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta"><span class="author">发布于</span>
+    <span class="created"><time datetime="2015-02-08T06:22:54.000Z">2015-02-08</time></span>
+    
+    <span class="updated">，更新于&nbsp;<time datetime="2023-12-22T02:19:50.000Z">2023-12-22</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>（译）CSS Guidelines (3)</span></h1>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>编写 CSS 之前的认知工作是非常巨大的。有很多事情要注意，不同项目中有很多细微的差别要记住，最糟糕的情况是大部分开发者发现他们“不是写这代码的人”。<strong>在一定程度上</strong>记忆你自己写的类名、规则、对象、辅助方法是可行的，但接受 CSS 的开发者则不然。</p>
+<p><strong>CSS 需要更多的注释。</strong></p>
+<p>CSS 是一种不会留下太多痕迹的声明式语言，但看 CSS 通常很难辨别：</p>
+<ul>
+<li>一段 CSS 是否与其他地方的代码相关联；</li>
+<li>一段 CSS 修改了其它地方会有什么影响；</li>
+<li>有没有别的 CSS 会用到；</li>
+<li>有何样式会被继承（有意无意的）；</li>
+<li>有何样式会被忽略（有意无意的）；</li>
+<li>某段 CSS 作者计划用在何处。</li>
+</ul>
+<p>我们甚至无需重视一些会让接手项目的开发者更棘手的诡异地方（比如 <code>overflow</code> 会触发 BFC，或者某些 <code>transform</code> 属性会触发硬件加速）。</p>
+<p>由于 CSS 没有将自己的特性表述清楚，因此需要大量的注释。</p>
+<p>一条规则是，你应该在任何有不直接明显信息的代码处写注释。意思是说，没必要告诉别人 <code>color: red;</code> 是用来变红的，但如果你用 <code>overflow: hidden;</code> 来清除浮动（和闭合浮动相对），这可能是值得记入文档的。</p>
+<h3 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h3><p>我们用一块80字符宽的多行注释来为整个小节或组件写注释。</p>
+<p>这是一个真实的例子，CSS Wizardry 的页头样式注释：</p>
+<pre><code>/**
+ * The site’s main page-head can have two different states:
+ *
+ * 1) Regular page-head with no backgrounds or extra treatments; it just
+ *    contains the logo and nav.
+ * 2) A masthead that has a fluid-height (becoming fixed after a certain point)
+ *    which has a large background image, and some supporting text.
+ *
+ * The regular page-head is incredibly simple, but the masthead version has some
+ * slightly intermingled dependency with the wrapper that lives inside it.
+ */
+</code></pre>
+<p>这种级别的细节应是对规定、序列、条件、处理方案等进行代码描述的样板。</p>
+<h4 id="对象扩展指针-（Objective-Extension-Pointers）"><a href="#对象扩展指针-（Objective-Extension-Pointers）" class="headerlink" title="对象扩展指针 （Objective-Extension Pointers）"></a>对象扩展指针 （Objective-Extension Pointers）</h4><p>当你要维护众多的模块，或者应用 OOCSS 的概念，你会发现相关联的 CSS 规则不总是在同一个文件或位置。例如，你会有一个按钮类的对象（纯粹提供结构样式），在皮肤组件部分中会有所扩展。我们用简单的对象扩展指针来记录这些跨文件的关系。在对象文件中：</p>
+<pre><code>/**
+ * Extend `.btn &#123;&#125;` in _components.buttons.scss.
+ */
+
+.btn &#123;&#125;
+</code></pre>
+<p>在主题文件中：</p>
+<pre><code>/**
+ * These rules extend `.btn &#123;&#125;` in _objects.buttons.scss.
+ */
+
+.btn--positive &#123;&#125;
+
+.btn--negative &#123;&#125;
+</code></pre>
+<p>这种简单的注释能极大地方便那些不知道项目间关系，或者想知道样式是如何、为何、从何继承的开发者。</p>
+<h3 id="低级（Low-level）"><a href="#低级（Low-level）" class="headerlink" title="低级（Low-level）"></a>低级（Low-level）</h3><p>很多时候我们想对一条规则中的多条声明进行注释。我们用一种颠倒的脚注。下面是一段更复杂的关于生面说到的网站头的注释。</p>
+<pre><code>/**
+ * Large site headers act more like mastheads. They have a faux-fluid-height
+ * which is controlled by the wrapping element inside it.
+ *
+ * 1. Mastheads will typically have dark backgrounds, so we need to make sure
+ *    the contrast is okay. This value is subject to change as the background
+ *    image changes.
+ * 2. We need to delegate a lot of the masthead’s layout to its wrapper element
+ *    rather than the masthead itself: it is to this wrapper that most things
+ *    are positioned.
+ * 3. The wrapper needs positioning context for us to lay our nav and masthead
+ *    text in.
+ * 4. Faux-fluid-height technique: simply create the illusion of fluid height by
+ *    creating space via a percentage padding, and then position everything over
+ *    the top of that. This percentage gives us a 16:9 ratio.
+ * 5. When the viewport is at 758px wide, our 16:9 ratio means that the masthead
+ *    is currently rendered at 480px high. Let’s…
+ * 6. …seamlessly snip off the fluid feature at this height, and…
+ * 7. …fix the height at 480px. This means that we should see no jumps in height
+ *    as the masthead moves from fluid to fixed. This actual value takes into
+ *    account the padding and the top border on the header itself.
+ */
+
+.page-head--masthead &#123;
+    margin-bottom: 0;
+    background: url(/img/css/masthead.jpg) center center #2e2620;
+    @include vendor(background-size, cover);
+    color: $color-masthead; /* [1] */
+    border-top-color: $color-masthead;
+    border-bottom-width: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) inset;
+
+    @include media-query(lap-and-up) &#123;
+        background-image: url(/img/css/masthead-medium.jpg);
+    &#125;
+
+    @include media-query(desk) &#123;
+        background-image: url(/img/css/masthead-large.jpg);
+    &#125;
+
+    &gt; .wrapper &#123; /* [2] */
+        position: relative; /* [3] */
+        padding-top: 56.25%; /* [4] */
+
+        @media screen and (min-width: 758px) &#123; /* [5] */
+            padding-top: 0; /* [6] */
+            height: $header-max-height - double($spacing-unit) - $header-border-width; /* [7] */
+        &#125;
+
+    &#125;
+
+&#125;
+</code></pre>
+<p>这类注释允许我们将所有的文档写到一起，并且指向各自标注的地方。</p>
+<h3 id="预处理注释"><a href="#预处理注释" class="headerlink" title="预处理注释"></a>预处理注释</h3><p>在大部分的预处理程序中，我们可以通过配置项使注释不会在编译时被省略掉。用这种注释来记录不需被省略的代码。如果有些代码要在编译时被省略则使用会被省略的注释。例如：</p>
+<pre><code>// Dimensions of the @2x image sprite:
+$sprite-width:  920px;
+$sprite-height: 212px;
+
+/**
+ * 1. Default icon size is 16px.
+ * 2. Squash down the retina sprite to display at the correct size.
+ */
+.sprite &#123;
+    width:  16px; /* [1] */
+    height: 16px; /* [1] */
+    background-image: url(/img/sprites/main.png);
+    background-size: ($sprite-width / 2 ) ($sprite-height / 2); /* [2] */
+&#125;
+</code></pre>
+<p>我们用预处理注释来记录变量（这些代码不会被写进 CSS 文件），而 CSS 则使用 CSS 注释。这意味着当我们 debug 样式表的时候只有正确的相关联的信息。</p>
+<h3 id="删除注释"><a href="#删除注释" class="headerlink" title="删除注释"></a>删除注释</h3><p>产品环境中应该没有注释，发布前所有的 CSS 都经过压缩。</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2015/03/03/how-to-use-the-html5-sectioning-elements/">（译）如何使用HTML5章节标签</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2015/02/05/css-guidelines_2/">（译）CSS Guidelines (2)</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/jackatlas">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">@JackAtlas8864</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    
+<script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js","marked":"/js/plugins/marked.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@10.3/swiper-bundle.min.css","js":"https://unpkg.com/swiper@10.3/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img, .gallery img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied","toast":"复制成功"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
