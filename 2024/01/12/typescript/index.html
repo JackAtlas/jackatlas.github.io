@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.24.1" theme-name="Stellar" theme-version="1.24.1">
+  
+  <meta name="generator" content="Hexo 7.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>2014-01-12-typescript - JackAtlas</title>
+
+  
+    <meta name="description" content="TypeScript 是什么？ TypeScript 是 JavaScript 的超集，在 JavaScript 的基础之上，为 JavaScript 添加了类型支持。  TypeScript 就像在写注释。 为什么要有 TypeScript？JavaScript 是一门弱类型语言，其代码中的错误绝大多数是类型错误（Uncaught TypeError）。这些经常出现的错误，严重影响了开发效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2014-01-12-typescript">
+<meta property="og:url" content="http://jackatlas.xyz/2024/01/12/typescript/index.html">
+<meta property="og:site_name" content="JackAtlas">
+<meta property="og:description" content="TypeScript 是什么？ TypeScript 是 JavaScript 的超集，在 JavaScript 的基础之上，为 JavaScript 添加了类型支持。  TypeScript 就像在写注释。 为什么要有 TypeScript？JavaScript 是一门弱类型语言，其代码中的错误绝大多数是类型错误（Uncaught TypeError）。这些经常出现的错误，严重影响了开发效率。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jackatlas.xyz/2024/01/12/typescript/1.png">
+<meta property="article:published_time" content="2024-01-12T15:04:17.000Z">
+<meta property="article:modified_time" content="2024-01-18T09:20:27.124Z">
+<meta property="article:author" content="JackAtlas">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jackatlas.xyz/2024/01/12/typescript/1.png">
+  
+  
+  
+  <meta name="keywords" content="TypeScript">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+
+<div class="l_cover post"><div class="cover"><div class="lazy img bg" data-bg="https://source.unsplash.com/2000x400/?typescript"></div></div></div>
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">JackAtlas</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search-wrapper"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1705074644177" class="icon search-icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" fill="#111111" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" fill="#00C569" p-id="1562"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc" collapse="false"><div class="widget-header cap dis-select"><span class="name">TypeScript 学习笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">TypeScript 是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-TypeScript%EF%BC%9F"><span class="toc-text">为什么要有 TypeScript？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">类型注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="toc-text">类型别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="toc-text">函数的类型别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#void-%E7%B1%BB%E5%9E%8B"><span class="toc-text">void 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0"><span class="toc-text">可选参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">对象类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B-1"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%8F%AF%E9%80%89%E5%B1%9E%E6%80%A7"><span class="toc-text">对象可选属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B"><span class="toc-text">接口类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interface-vs-type"><span class="toc-text">interface vs type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF"><span class="toc-text">接口继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BB%84-Tuple-%E7%B1%BB%E5%9E%8B"><span class="toc-text">元组 Tuple 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E8%AE%BA"><span class="toc-text">类型推论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B%E9%85%8D%E5%90%88%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8"><span class="toc-text">字面量类型配合联合类型一起使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="toc-text">枚举类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#any-%E7%B1%BB%E5%9E%8B"><span class="toc-text">any 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="toc-text">类型断言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-text">简化泛型函数调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F"><span class="toc-text">泛型约束</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/jackatlas" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta"><span class="author">发布于</span>
+    <span class="created"><time datetime="2024-01-12T15:04:17.000Z">2024-01-12</time></span>
+    
+    <span class="updated">，更新于&nbsp;<time datetime="2024-01-18T09:20:27.124Z">2024-01-18</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>TypeScript 学习笔记</span></h1>
+<h2 id="TypeScript-是什么？"><a href="#TypeScript-是什么？" class="headerlink" title="TypeScript 是什么？"></a>TypeScript 是什么？</h2><blockquote>
+<p>TypeScript 是 JavaScript 的超集，在 JavaScript 的基础之上，为 JavaScript 添加了类型支持。</p>
+</blockquote>
+<p>TypeScript 就像在写注释。</p>
+<h2 id="为什么要有-TypeScript？"><a href="#为什么要有-TypeScript？" class="headerlink" title="为什么要有 TypeScript？"></a>为什么要有 TypeScript？</h2><p>JavaScript 是一门弱类型语言，其代码中的错误绝大多数是类型错误（Uncaught TypeError）。这些经常出现的错误，严重影响了开发效率。</p>
+<p>从编程语言的动静来区分，TypeScript 属于静态类型的编程语言，JavaScript 属于动态类型的编程语言。</p>
+<ul>
+<li>静态类型：编译期做类型检查</li>
+<li>动态类型：执行期做类型检查</li>
+</ul>
+<p>因此：</p>
+<ul>
+<li>对于 JavaScript 来说，需要等到代码执行的时候才能发现错误（晚）；</li>
+<li>对于 TypeScript 来说，在代码编译的时候就能发现错误（早），配合开发工具，可以提前到在编写代码的时候就能发现代码中的错误（更早）。</li>
+</ul>
+<p>另外，对于 TypeScript 编辑器的代码提示更丰富，开发体验更好。</p>
+<h2 id="类型注解"><a href="#类型注解" class="headerlink" title="类型注解"></a>类型注解</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">age</span>: <span class="built_in">number</span> = <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p>形如 <code>: number</code> 这部分代码叫类型注解，作用是为变量添加类型约束。浏览器据此可以进行报错和代码提示。</p>
+<ul>
+<li>JavaScript 已有类型：<ul>
+<li>原始类型：number&#x2F;string&#x2F;boolean&#x2F;null&#x2F;undefined</li>
+<li>复杂类型：数组、对象、方法</li>
+</ul>
+</li>
+<li>TypeScript 新增类型：联合、自定义、接口、元组、字面量、枚举、void 等</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">name</span>: <span class="built_in">string</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">age</span>: <span class="built_in">number</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">bool</span>: <span class="built_in">boolean</span> = <span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">gender</span>: <span class="literal">undefined</span> = <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">hobby</span>: <span class="literal">null</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明数组的方式 1</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr1</span>: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 声明数组的方式 2，范型</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr2</span>: <span class="title class_">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 联合类型</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr</span>: (<span class="built_in">number</span> | <span class="built_in">string</span>)[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;abc&#x27;</span>]</span><br><span class="line"><span class="comment">// 会丢失一部分代码提示，只能提示共有的方法和属性</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">ArrType</span> = (<span class="built_in">number</span> | <span class="built_in">string</span>)[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr1</span>: <span class="title class_">ArrType</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;abc&#x27;</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr2</span>: <span class="title class_">ArrType</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;abc&#x27;</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr3</span>: <span class="title class_">ArrType</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;abc&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ItemType</span> = <span class="built_in">number</span> | <span class="built_in">string</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr4</span>: <span class="title class_">ItemType</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;abc&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add1</span>(<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> add2 = (<span class="attr">a</span>: <span class="built_in">number</span>, <span class="attr">b</span>: <span class="built_in">number</span>): <span class="function"><span class="params">number</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数的类型别名"><a href="#函数的类型别名" class="headerlink" title="函数的类型别名"></a>函数的类型别名</h3><p>函数的类型别名通常是给箭头函数 &#x2F; 函数表达式使用，不会给函数声明使用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">FnType</span> = <span class="function">(<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">add</span>: <span class="title class_">FnType</span> = <span class="keyword">function</span> (<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">sub</span>: <span class="title class_">FnType</span> = <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a - b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="void-类型"><a href="#void-类型" class="headerlink" title="void 类型"></a>void 类型</h3><p>如果函数不写 return，默认返回值是 undefined，但是 TypeScript 类型推断为 void。在 TypeScript 中写 <code>: undefined</code> 的意思是必须返回一个 undefined。TypeScript 提供了一个返回值类型 <code>: void</code> 意思就是没有返回值。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> show = (<span class="attr">content</span>: <span class="built_in">string</span>): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(content)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3><ul>
+<li>在 JavaScript 中定义了形参，调用函数时可以不传实参</li>
+<li>在 TypeScript 中定义了形参，调用函数时必须传入实参，否则报错</li>
+</ul>
+<p>如果要实现可选参数，加一个 <code>?</code>，可选参数只能放在参数列表的最后。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">print</span> = (<span class="params">name?: <span class="built_in">string</span>, gender?: <span class="built_in">string</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(name, gender)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">obj</span>: &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">(<span class="params">content: <span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125; = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;某某某&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">38</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;未知&#x27;</span>,</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params">content</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(content)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用类型别名：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">hobby</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="attr">content</span>: <span class="built_in">string</span>) =&gt; <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">obj</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;张某&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">32</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;未知&#x27;</span>,</span><br><span class="line">  <span class="attr">hobby</span>: <span class="string">&#x27;足球&#x27;</span>,</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params">content</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;你好，&#x27;</span> + content)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数类型-1"><a href="#函数类型-1" class="headerlink" title="函数类型"></a>函数类型</h3><p>函数类型有两种定义方式：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">greet</span>: <span class="function">(<span class="params">name: <span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">  <span class="title function_">run</span>(<span class="attr">distance</span>: <span class="built_in">number</span>): <span class="built_in">void</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对象可选属性"><a href="#对象可选属性" class="headerlink" title="对象可选属性"></a>对象可选属性</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">hobby</span>: <span class="built_in">string</span>,</span><br><span class="line">  girlFriend?: <span class="built_in">string</span>, <span class="comment">// ? 表示可选属性</span></span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="attr">content</span>: <span class="built_in">string</span>) =&gt; <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">obj</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;张某&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">32</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;未知&#x27;</span>,</span><br><span class="line">  <span class="attr">hobby</span>: <span class="string">&#x27;足球&#x27;</span>,</span><br><span class="line">  <span class="attr">girlFriend</span>: <span class="string">&#x27;刘亦菲&#x27;</span></span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params">content</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;你好，&#x27;</span> + content)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是直接调用可选属性的属性会报错，因为可选属性可能未定义。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.<span class="property">girlFriend</span>.<span class="title function_">concat</span>() <span class="comment">// 这样写会报错，因为 obj.girlFriend 可能未定义</span></span><br></pre></td></tr></table></figure>
+
+<p>正确的写法应当加上判断</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (obj.<span class="property">girlFriend</span>) &#123;</span><br><span class="line">  obj.<span class="property">girlFriend</span>.<span class="title function_">concat</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"></span><br><span class="line">obj.<span class="property">girlFriend</span> &amp;&amp; obj.<span class="property">girlFriend</span>.<span class="title function_">concat</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="comment">// 可选链操作</span></span><br><span class="line">obj.<span class="property">girlFriend</span>?.<span class="title function_">concat</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h2><p>接口类型的作用是给对象约束属性和方法。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">IPerson</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">p1</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;张某&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;未知&#x27;</span>,</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="interface-vs-type"><a href="#interface-vs-type" class="headerlink" title="interface vs type"></a>interface vs type</h3><ul>
+<li>相同点：都可以约束对象</li>
+<li>不同点：<ul>
+<li>接口只能约束对象</li>
+<li>类型别名可以约束任意类型</li>
+</ul>
+</li>
+<li>推荐能用 type 就用 type</li>
+</ul>
+<h3 id="接口继承"><a href="#接口继承" class="headerlink" title="接口继承"></a>接口继承</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">IPerson</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IStudent 具备 IPerson 的所有约束规则</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IStudent</span> <span class="keyword">extends</span> <span class="title class_">IPerson</span> &#123;</span><br><span class="line">  <span class="attr">score</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">sleep</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 type 近似实现继承效果：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">gender</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Student</span> = &#123;</span><br><span class="line">  <span class="attr">score</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">sleep</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125; &amp; <span class="title class_">Person</span></span><br><span class="line"><span class="comment">// &amp; “与”连接符：既要满足前面的也要满足后面的</span></span><br><span class="line"><span class="comment">// | “或”连接符：满足前后之一即可</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="元组-Tuple-类型"><a href="#元组-Tuple-类型" class="headerlink" title="元组 Tuple 类型"></a>元组 Tuple 类型</h2><blockquote>
+<p>元组：限定数组的固定类型和长度，常用于地图应用中记录经纬度</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通的数组定义（只能限制类型，不能限制长度）</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr1</span>: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 元组定义（既能限制类型，也能限制长度）</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">arr2</span>: [<span class="built_in">number</span>, <span class="built_in">number</span>] = [<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型推论"><a href="#类型推论" class="headerlink" title="类型推论"></a>类型推论</h2><blockquote>
+<p>在 TypeScript 中，某些没有明确指出类型的地方，类型推论机制会帮助提供类型。</p>
+</blockquote>
+<p>两种常见场景：</p>
+<ol>
+<li>声明变量并初始化时；</li>
+<li>决定函数返回值时。</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age = <span class="number">18</span> <span class="comment">// age 类型自动被推论为 number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a * b <span class="comment">// 返回值类型自动推断为 number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h2><blockquote>
+<p>const 声明的变量是不可修改的，TypeScript 会将其值当作一个类型，这种类型就被称作“字面量”类型。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1 = <span class="string">&#x27;Hello TS&#x27;</span> <span class="comment">// string 类型</span></span><br><span class="line"><span class="keyword">const</span> str2 = <span class="string">&#x27;Hello TS&#x27;</span> <span class="comment">// Hello TS 类型</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字面量类型配合联合类型一起使用"><a href="#字面量类型配合联合类型一起使用" class="headerlink" title="字面量类型配合联合类型一起使用"></a>字面量类型配合联合类型一起使用</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Direction</span> = <span class="string">&#x27;上&#x27;</span> | <span class="string">&#x27;下&#x27;</span> | <span class="string">&#x27;左&#x27;</span> | <span class="string">&#x27;右&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">changeDirection</span>(<span class="params">direction: Direction</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(direction)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不设置值，默认从 0 开始，后面的自动累加</span></span><br><span class="line"><span class="comment">// 如果要设置值，用 = 赋值</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Direction</span> &#123;</span><br><span class="line">  <span class="title class_">Up</span>,</span><br><span class="line">  <span class="title class_">Down</span>,</span><br><span class="line">  <span class="title class_">Left</span>,</span><br><span class="line">  <span class="title class_">Right</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">changeDirection</span>(<span class="params">direction: Direction</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(direction)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">changeDirection</span>(<span class="title class_">Direction</span>.<span class="property">Up</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="title function_">changeDirection</span>(<span class="title class_">Direction</span>.<span class="property">Down</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title function_">changeDirection</span>(<span class="title class_">Direction</span>.<span class="property">Left</span>) <span class="comment">// 2</span></span><br><span class="line"><span class="title function_">changeDirection</span>(<span class="title class_">Direction</span>.<span class="property">Right</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>枚举的编译结果是一个对象。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/01/12/typescript/1.png" alt="枚举" title="enum"></p>
+<h2 id="any-类型"><a href="#any-类型" class="headerlink" title="any 类型"></a>any 类型</h2><p>原则上不推荐使用 any，会失去 TypeScript 类型保护的优势。</p>
+<p>当值的类型为 any 时，可以对值进行任意操作，并且不会有代码提示。</p>
+<h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><p>当函数获取到的结果类型较为宽泛，而我们又知道具体类型时，可以通过类型断言强行指定结果类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;link&#x27;</span>) <span class="keyword">as</span> <span class="title class_">HTMLAnchorElement</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><blockquote>
+<p>泛型是在保证类型安全的前提下，让函数等与多种类型一起工作，从而实现复用，常用于：函数、接口、class 中。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 期望：调用函数时来指定传入参数的类型</span></span><br><span class="line"><span class="comment">// &lt;T&gt;    -&gt; 在声明泛型</span></span><br><span class="line"><span class="comment">// val: T -&gt; 使用泛型</span></span><br><span class="line"><span class="keyword">function</span> getId&lt;T&gt;(<span class="attr">val</span>: T) &#123;</span><br><span class="line">  <span class="keyword">return</span> val</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(getId&lt;<span class="built_in">number</span>&gt;(<span class="number">123</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(getId&lt;<span class="built_in">string</span>&gt;(<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(getId&lt;<span class="built_in">boolean</span>&gt;(<span class="literal">true</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="简化泛型函数调用"><a href="#简化泛型函数调用" class="headerlink" title="简化泛型函数调用"></a>简化泛型函数调用</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeScript 会自动推断类型</span></span><br><span class="line"><span class="comment">// 得到的 result 是字面量类型</span></span><br><span class="line"><span class="keyword">const</span> result1 = <span class="title function_">getId</span>(<span class="number">123</span>)</span><br><span class="line"><span class="keyword">const</span> result2 = <span class="title function_">getId</span>(<span class="string">&#x27;abc&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> result3 = <span class="title function_">getId</span>(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> getId&lt;T&gt;(<span class="attr">val</span>: T) &#123;</span><br><span class="line">  <span class="comment">// 类型收缩：比较麻烦</span></span><br><span class="line">  <span class="keyword">if</span> () &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以利用接口继承的方法来添加约束：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">ILength</span> &#123;</span><br><span class="line">  <span class="attr">length</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> getId&lt;T <span class="keyword">extends</span> <span class="title class_">ILength</span>&gt;(<span class="attr">val</span>: T) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(val.<span class="property">length</span>)</span><br><span class="line">  <span class="keyword">return</span> val</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/01/09/pinia-2/">pinia-2</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/jackatlas">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">@JackAtlas8864</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    
+<script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js","marked":"/js/plugins/marked.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@10.3/swiper-bundle.min.css","js":"https://unpkg.com/swiper@10.3/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img, .gallery img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied","toast":"复制成功"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
